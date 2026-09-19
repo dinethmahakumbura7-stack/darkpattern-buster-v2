@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deceptive Shop - Test Bench</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 24px;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .urgent-banner {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-confirmshame {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      text-decoration: underline;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Checkout Summary</h1>
+
+  <!-- Pattern 1: Fake Urgency Timer -->
+  <div class="card urgent-banner">
+    <span>⚠️ Limited Time Offer! Your cart expires in:</span>
+    <span id="fake-timer" style="font-size: 1.25rem;">04:59</span>
+  </div>
+
+  <!-- Pattern 2: Sneaky Prechecked Recurring Add-on -->
+  <div class="card">
+    <h2 style="font-size: 1.1rem; margin-top: 0;">Order Details</h2>
+    <p>Premium Noise-Cancelling Headphones: <strong>$129.99</strong></p>
+    <div style="margin-top: 12px; padding: 10px; background: #f1f5f9; border-radius: 6px;">
+      <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="sneak-charge" checked />
+        <span>Add 2-Year Full Damage Protection for <strong>$6.99/mo (Auto-renew)</strong></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Pattern 3: Confirmshaming Opt-out -->
+  <div class="card" style="text-align: center;">
+    <h3 style="margin-top: 0;">Wait! Grab 25% Off Today</h3>
+    <p style="color: #64748b; font-size: 14px;">Subscribe to our VIP shopping alerts to claim this discount.</p>
+    <button class="btn-primary">Claim My 25% Discount</button>
+    <br />
+    <button class="btn-confirmshame">
+      No thanks, I hate saving money and prefer paying full price
+    </button>
+  </div>
+
+  <script>
+    // Fake ticking timer script
+    let totalSeconds = 299;
+    setInterval(() => {
+      const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const secs = String(totalSeconds % 60).padStart(2, '0');
+      document.getElementById('fake-timer').innerText = `${mins}:${secs}`;
+      if (totalSeconds > 0) totalSeconds--;
+    }, 1000);
+  </script>
+</body>
+</html>

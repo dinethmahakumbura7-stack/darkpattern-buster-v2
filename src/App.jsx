@@ -1,122 +1,44 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [score, setScore] = useState(0);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="w-80 bg-slate-900 text-slate-100 p-4 font-sans select-none">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-xl">🛡️</span>
+          <h1 className="text-base font-bold text-slate-100">DarkPattern Buster</h1>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+        <span className="text-[10px] font-semibold tracking-wider bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full border border-slate-700">
+          V1.0
+        </span>
+      </div>
+
+      {/* Score Card */}
+      <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-4 text-center mb-4 shadow-sm">
+        <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
+          Deception Risk Score
+        </p>
+        <div className={`text-4xl font-black ${score > 50 ? 'text-rose-400' : 'text-emerald-400'}`}>
+          {score}
+          <span className="text-base font-medium text-slate-500">/100</span>
         </div>
+        <p className="text-xs mt-1 font-medium text-slate-300">
+          {score === 0 ? "No dark patterns detected yet" : "3 Deceptions flagged on this page"}
+        </p>
+      </div>
+
+      {/* Action Button */}
+      <div className="space-y-2">
         <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={() => setScore(prev => (prev === 0 ? 70 : 0))}
+          className="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white rounded-lg text-sm font-semibold transition shadow"
         >
-          Count is {count}
+          {score === 0 ? "Test Scan Page" : "Reset Score"}
         </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
-
-export default App
